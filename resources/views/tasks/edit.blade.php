@@ -18,6 +18,15 @@
               </div>
             </div>
             
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label text-right">
+                {!! Form::label('status', 'Status:') !!} 
+              </label>
+              <div class="col-sm-10">
+              {!! Form::text('status', null, ['class' => 'form-control']) !!}
+              </div>
+            </div>
+            
             {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}
           
           {!! Form::close() !!}
