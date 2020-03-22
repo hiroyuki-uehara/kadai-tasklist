@@ -73,6 +73,7 @@ class TasksController extends Controller
         $task = Task::find($id);
         $task->delete();
         
-        return redirect('');
+        // 修正したのですが、何故かGitHubに反映されませんでした。
+        return redirect('/'); 
     }
 }
