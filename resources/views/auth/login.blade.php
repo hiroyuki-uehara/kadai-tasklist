@@ -18,7 +18,6 @@
               {!! Form::label('password', 'Password') !!}
               {!! Form::password('password', ['class' => 'form-control']) !!}
           </div>
-          
           {!! Form::submit('Log in', ['class' => 'mt-4 btn btn-primary btn-block']) !!}
         {!! Form::close() !!}
         <p></p>

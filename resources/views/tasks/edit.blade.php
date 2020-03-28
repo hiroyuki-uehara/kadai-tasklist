@@ -3,7 +3,7 @@
 @section('content')
 
   
-  <h1> Edit Task {{ $task->id }}</h1>
+  <h2 class="mb-4"> Edit Task {{ $task->id }}</h2>
   
   <div class="row">
       <div class="col-6">
@@ -11,7 +11,7 @@
           
             <div class="form-group row">
               <label class="col-sm-2 col-form-label text-right">
-                {!! Form::label('content', 'Task:') !!}
+                {!! Form::label('content', 'Task :') !!}
               </label>
               <div class="col-sm-10">
               {!! Form::text('content', null, ['class' => 'form-control']) !!}
