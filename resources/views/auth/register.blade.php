@@ -28,8 +28,9 @@
               {!! Form::label('password_confirmation', 'Confirmation') !!}
               {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
           </div>
-          
+          <div class="mt-4">
           {!! Form::submit('Sign up', ['class' => 'btn btn-primary btn-block']) !!}
+          </div>
         {!! Form::close() !!}
     </div>
   </div>

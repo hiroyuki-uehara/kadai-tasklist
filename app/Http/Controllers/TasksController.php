@@ -10,18 +10,19 @@ class TasksController extends Controller {
     
     public function index()
     {
-        $data = [];
-        if (Auth::check()) {
-            $user = Auth::user();
-            $tasks = $user->tasks()->paginate(5);
+            $data = [];
+            
+            if (Auth::check()) {
+                $user = Auth::user();
+                $tasks = $user->tasks()->paginate(5);
+    
+                $data = [
+                'user' => $user,
+                'tasks' => $tasks, 
+                ];
+            }
 
-            $data = [
-            'user' => $user,
-            'tasks' => $tasks, 
-            ];
-        }
-        
-        return view('welcome', $data);
+            return view('welcome', $data);
     }
 
     
@@ -46,13 +47,15 @@ class TasksController extends Controller {
         $task->content = $request->content;
         $task->status = $request->status;
         $task->user_id = $request->user()->id;
-        $task->save();
-        
-        // $request->user()->tasks()->create([
-        //     'content' => $request->content,
-        //     'status' => $request->status,
-        //     'user_id' => $request->user()->id,
-        // ]);
+        if (Auth::id() === $task->user_id) {
+            $task->save();
+        }
+            
+            // $request->user()->tasks()->create([
+            //     'content' => $request->content,
+            //     'status' => $request->status,
+            //     'user_id' => $request->user()->id,
+            // ]);
 
         return redirect('/');
     }
@@ -62,9 +65,15 @@ class TasksController extends Controller {
     {
         $task = Task::find($id);
         
-        return view('tasks.show', [
-            'task' => $task,
-        ]);
+        if (Auth::id() === $task->user_id) {
+            
+            return view('tasks.show', [
+                'task' => $task,
+            ]);
+        }
+        else {
+             return redirect('/'); 
+        }
     }
     
     
@@ -72,9 +81,14 @@ class TasksController extends Controller {
     {
         $task = Task::find($id);
         
-        return view('tasks.edit', [
-            'task' => $task,
-        ]);
+        if (Auth::id() === $task->user_id) {
+            return view('tasks.edit', [
+                'task' => $task,
+            ]);
+        }
+        else {
+             return redirect('/'); 
+        }
     }
 
     
@@ -89,9 +103,12 @@ class TasksController extends Controller {
         $task->content = $request->content;
         $task->status = $request->status;
         $task->user_id = $request->user()->id;
-        $task->save();
+        if (Auth::id() === $task->user_id) {
+            $task->save();
+        }
         
-        // $request->user()->tasks()->create([
+        // $task = Task::find($id);
+        // $request->task->create([
         //     'content' => $request->content,
         //     'status' => $request->status,
         //     'user_id' => $request->user()->id,
